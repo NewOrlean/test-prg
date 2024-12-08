@@ -23,6 +23,6 @@ def handle_data():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
-
+    # Привязываем сервер к адресу 0.0.0.0, чтобы он был доступен извне
+    app.run(host="0.0.0.0", port=8080, debug=True)
 
