@@ -1,2 +1,2 @@
-web: gunicorn main:app --bind 0.0.0.0:$PORT
+web: cd frontend && yarn install && yarn build && cd .. && gunicorn main:app --bind 0.0.0.0:$PORT
 

@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, send_from_directory
 import os
 
-app = Flask(__name__, static_folder='frontend/build')
+app = Flask(__name__, static_folder='frontend/build', static_url_path='')
 
 # API маршрут
 @app.route('/api/data', methods=['POST'])
@@ -26,8 +26,10 @@ def handle_data():
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def serve(path):
+    # Если путь существует в папке сборки, отдаем его
     if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
         return send_from_directory(app.static_folder, path)
+    # Иначе отдаем index.html для всех других путей (для работы React Router)
     else:
         return send_from_directory(app.static_folder, 'index.html')
 
