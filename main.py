@@ -1,7 +1,10 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 app = Flask(__name__)
 
+# Разрешаем CORS для всех доменов (если нужно разрешить только конкретные, можно настроить параметры)
+CORS(app)
 
 @app.route('/api/data', methods=['POST'])
 def handle_data():
@@ -20,7 +23,6 @@ def handle_data():
         "message": f"Hello, {name}! You are {age} years old.",
         "received_data": data
     })
-
 
 if __name__ == '__main__':
     # Привязываем сервер к адресу 0.0.0.0, чтобы он был доступен извне
